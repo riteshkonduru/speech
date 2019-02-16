@@ -1,26 +1,31 @@
 <html>
 <head>
-   <title>Microsoft Cognitive Service Speech SDK JavaScript Quickstart</title>
+   <title>InterviewApp</title>
 </head>
 <body>
  <!-- UI code goes here -->
  <div id="warning">
-  <h1 style="font-weight:500;">Speech Recognition Speech SDK not found (microsoft.cognitiveservices.speech.sdk.bundle.js missing).</h1>
+  <h1 style="font-weight:500;">Something missing please check</h1>
 </div>
 
 <div id="content" style="display:none">
   <table width="100%">
     <tr>
       <td></td>
-      <td><h1 style="font-weight:500;">Microsoft Cognitive Services Speech SDK JavaScript Quickstart</h1></td>
+      <td><h1 style="font-weight:500;">Please Click "Ask Question"</h1></td>
     </tr>
     <tr>
-      <td align="right"><a href="https://docs.microsoft.com/azure/cognitive-services/speech-service/get-started" target="_blank">Subscription</a>:</td>
-      <td><input id="subscriptionKey" type="text" size="40" value="subscription"></td>
+      <td align="right">Subscription</td>
+      <!--<td align="right"><a href="https://docs.microsoft.com/azure/cognitive-services/speech-service/get-started" target="_blank">Subscription</a>:</td>-->
+      <td><input id="subscriptionKey" type="text" size="40" value="b21e2b0fedd243f79a6f899bb73391b7"></td>
     </tr>
     <tr>
       <td align="right">Region</td>
-      <td><input id="serviceRegion" type="text" size="40" value="YourSubscriptionServiceRegion"></td>
+      <td><input id="serviceRegion" type="text" size="40" value="westus"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><button onclick="speakMe()">Ask Question</button></td>
     </tr>
     <tr>
       <td></td>
@@ -52,6 +57,17 @@
   var SpeechSDK;
   var recognizer;
 
+  function speakMe(){
+      console.log('Ritesh');
+      if('speechSynthesis' in window){
+            var voices = speechSynthesis.getVoices();
+            var speech = new SpeechSynthesisUtterance('Hi, Tell me about yourSelf');
+            speech.lang = 'en-US';
+            speech.voice = voices[1];
+            window.speechSynthesis.speak(speech);
+          }
+    }
+
   document.addEventListener("DOMContentLoaded", function () {
     startRecognizeOnceAsyncButton = document.getElementById("startRecognizeOnceAsyncButton");
     subscriptionKey = document.getElementById("subscriptionKey");
@@ -59,6 +75,7 @@
     phraseDiv = document.getElementById("phraseDiv");
 
     startRecognizeOnceAsyncButton.addEventListener("click", function () {
+
       startRecognizeOnceAsyncButton.disabled = true;
       phraseDiv.innerHTML = "";
 
